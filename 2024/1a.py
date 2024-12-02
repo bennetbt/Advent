@@ -1,12 +1,10 @@
 import pandas as pd
 
-data = pd.read_csv('data/input_1.txt',header=None,sep='\s+')
+data = pd.read_csv('data/input_1.txt',header=None,sep='\s+',names=['left','right'])
 
-left = data[0].to_list()
-right = data[1].to_list()
+data['left'] = sorted(data['left'])
+data['right'] = sorted(data['right'])
 
-left.sort()
-right.sort()
-diff = [abs(i-j) for i,j in list(zip(left,right))]
+diff_sum = (data['left'] - data['right']).abs().sum()
 
-print(sum(diff))
+print(diff_sum)
